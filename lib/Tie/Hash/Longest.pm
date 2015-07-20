@@ -1,6 +1,6 @@
 package Tie::Hash::Longest;
 
-$VERSION='1.1';
+$VERSION='1.2';
 
 use strict;
 
@@ -12,19 +12,19 @@ sub TIEHASH {
 
 sub longestkey {
     my $self = shift;
-    rescan($self) if($self->{RESCAN_NEEDED});
+    _rescan($self) if($self->{RESCAN_NEEDED});
     $self->{KEY};
 }
 
 sub longestvalue {
     my $self = shift;
-    rescan($self) if($self->{RESCAN_NEEDED});
+    _rescan($self) if($self->{RESCAN_NEEDED});
     $self->{VALUE};
 }
 
 # the no warnings here (and the one later) are so we can take length(undef)
 
-sub rescan {
+sub _rescan {
     no warnings;
     my $self = shift;
     $self->{KEY} = $self->{VALUE} = undef;
@@ -126,6 +126,8 @@ Return the longest key.
 =item C<longestvalue>
 
 Return the longest value.
+
+=back
 
 =head1 AUTHOR
 
